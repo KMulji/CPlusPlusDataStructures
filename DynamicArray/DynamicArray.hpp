@@ -86,6 +86,10 @@ class DynamicArray
         }
         void Insert(int index, T val)
         {
+            if(index<0 || index >= GetLength()){
+                std::cout<<"Invalid index for insert"<<std::endl;
+                return;
+            }
             // 1 2 3 4 5
             if(this->GetLength() == this->GetSize())
             {
@@ -114,6 +118,10 @@ class DynamicArray
         }
         int Delete(int index)
         {
+            if(index<0 || index >= GetLength()){
+                std::cout<<"Invalid index for delete"<<std::endl;
+                return-1;
+            }
             if(this->GetLength() == this->GetSize()/2)
             {
                 Shrink();
@@ -129,4 +137,36 @@ class DynamicArray
             return value;
 
         }
+        int LinearSearch(int key)
+        {
+            for(int i=0;i<GetLength();i++)
+            {
+                if(this->arr[i]==key)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        int BinarySearch(int key)
+        {
+            int lo=0;
+            int hi = GetLength()-1;
+            while(lo<=hi)
+            {
+                int mid = lo +(hi-lo)/2;
+                if(this->arr[mid]==key)
+                {
+                    return mid;
+                }else if(this->arr[mid]>key)
+                {
+                    hi=mid-1;
+                }else if(this->arr[mid]<key)
+                {
+                    lo=mid+1;
+                }
+            }
+            return -1;
+        }
+        
 };
