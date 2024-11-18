@@ -168,5 +168,40 @@ class DynamicArray
             }
             return -1;
         }
+        void Reverse()
+        {
+            int i=0;
+            int j = GetLength()-1;
+
+            while(i<j)
+            {
+                int temp = arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+
+                i++;
+                j--;
+            }
+        }
+        T operator[](int index) const
+        {
+            if(index<0 || index >= GetLength()){
+                std::cout<<"Invalid index for get"<<std::endl;
+                return -1;
+            }
+            return arr[index];
+        }
+        T& operator [] (int index) 
+        {
+            if(index<0 || index >= GetLength()){
+                std::cout<<"Invalid index for get"<<std::endl;
+
+                return arr[0];
+            }
+            return arr[index];
+        }
+        
+        
+
         
 };
