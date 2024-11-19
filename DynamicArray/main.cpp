@@ -2,9 +2,9 @@
 #include "DynamicArray.hpp"
 int main()
 {
-    int A[6] = {1,2,3,4,5,6};
-    DynamicArray<int> da = DynamicArray<int>(A,6);
-    da.Reverse();
+    int A[9] = {50,70,60,90,40,80,10,20,30};
+    DynamicArray<int> da = DynamicArray<int>(A,9);
+    da.QuickSort();
     da.Display();
 
     

@@ -40,6 +40,40 @@ class DynamicArray
 
             }
         }
+        void QuickSortPrivate(int low,int hi,T A[])
+        {
+            if(low>=hi)
+            {
+                return;
+            }
+            int j = Partition(low,hi,A);
+            
+            QuickSortPrivate(low,j-1,A);
+            QuickSortPrivate(j+1,hi,A);
+        }
+        int Partition(int low,int high,T A[])
+        {
+            T pivot = A[high];
+            
+            int i=low;
+            int j=high-1;
+            while(i<j)
+            {
+                
+                while(A[j]>pivot){j--;}
+
+                while(A[i]<pivot){i++;}
+                if(i<j){
+                    T temp = A[i];
+                    A[i]=A[j];
+                    A[j]=temp;
+                }
+            }
+            T temp = A[i];
+            A[i]=A[high];
+            A[high]=temp;
+            return i;
+        }
 
     public:
         DynamicArray()
@@ -200,6 +234,14 @@ class DynamicArray
             }
             return arr[index];
         }
+
+        void QuickSort()
+        {
+            
+            QuickSortPrivate(0,GetLength()-1,this->arr);
+
+        }
+        
         
         
 
