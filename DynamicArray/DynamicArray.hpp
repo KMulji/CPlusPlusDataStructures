@@ -9,7 +9,10 @@ class DynamicArray
         T *arr; 
         int size;
         int length;
-
+        /*
+            Name: Expand()
+            Description: Grow the array when length == size
+        */
         void Expand()
         {
             if(GetLength()==GetSize())
@@ -24,6 +27,10 @@ class DynamicArray
                 arr=temp;
             }
         }
+        /*
+            Name: Shrink()
+            Description: Shrink the array when size/2==len
+        */
         void Shrink()
         {
             if(GetLength()==GetSize()/2)
@@ -40,6 +47,10 @@ class DynamicArray
 
             }
         }
+        /*
+            Name:QuickSortPrivate
+            Description: private function to manage recursive calls of quicksort
+        */
         void QuickSortPrivate(int low,int hi,T A[])
         {
             if(low>=hi)
@@ -51,12 +62,17 @@ class DynamicArray
             QuickSortPrivate(low,j-1,A);
             QuickSortPrivate(j+1,hi,A);
         }
+        /*
+            Name: Partition
+            Description: sort the partitioned section of quicksort
+        */
         int Partition(int low,int high,T A[])
         {
             T pivot = A[high];
             
             int i=low;
             int j=high-1;
+
             while(i<j)
             {
                 
@@ -76,12 +92,20 @@ class DynamicArray
         }
 
     public:
+        /*
+            Name: Dynamic Array
+            Description: Default constructor
+        */
         DynamicArray()
         {
             this->arr = new T[10];
             this->size=10;
             this->length=-1;
         }
+        /*
+            Name:DynamicArray
+            Description: Construct a dynamic array from a standard C++ array;
+        */
         DynamicArray(T A[] , int n)
         {
             this->size=n;
@@ -93,14 +117,26 @@ class DynamicArray
                 arr[i]=A[i];
             }
         }
+        /*
+            Name: Get Length
+            Description: return number of elements in the array
+        */
         int GetLength()
         {
             return this->length+1;
         }
+        /*
+            Name: Get Size
+            Description: Return capacity of array
+        */
         int GetSize()
         {
             return this->size;
         }
+        /*
+            Name: Display()
+            Description: Print the contents of dynamic array to terminal
+        */
         void Display()
         {
             for(int i=0;i<GetLength();i++)
@@ -108,6 +144,10 @@ class DynamicArray
                 std::cout<<this->arr[i]<<std::endl;
             }
         }
+        /*
+            Name: Append()
+            Description: Add element to the end of dynamic array
+        */
         void Append(T val)
         {
             
@@ -118,6 +158,10 @@ class DynamicArray
             this->length++;
             this->arr[this->length] = val;
         }
+        /*
+            Name:Insert
+            Description:Add a element at a specific index withint dynamic array 
+        */
         void Insert(int index, T val)
         {
             if(index<0 || index >= GetLength()){
@@ -138,6 +182,10 @@ class DynamicArray
             this->length++;
 
         }
+        /*
+            Name: PopBack
+            Description: Delete element from end of array.
+        */
         int PopBack()
         {
             int val;
@@ -150,6 +198,10 @@ class DynamicArray
 
             return val;
         }
+        /*
+            Name: Delete
+            Description: Remove and return element at specified index. 
+        */
         int Delete(int index)
         {
             if(index<0 || index >= GetLength()){
@@ -171,6 +223,10 @@ class DynamicArray
             return value;
 
         }
+        /*
+            Name: Linear Search
+            Description: Find an element in 0(N) time.
+        */
         int LinearSearch(int key)
         {
             for(int i=0;i<GetLength();i++)
@@ -182,6 +238,10 @@ class DynamicArray
             }
             return -1;
         }
+        /*
+            Name: BinarySearch
+            Description: Find an element in O(logn) time
+        */
         int BinarySearch(int key)
         {
             int lo=0;
@@ -202,6 +262,10 @@ class DynamicArray
             }
             return -1;
         }
+        /*
+            Name: Reverse
+            Description: Reverse the array
+        */
         void Reverse()
         {
             int i=0;
@@ -234,7 +298,10 @@ class DynamicArray
             }
             return arr[index];
         }
-
+        /*
+            Name: Quicksort
+            Description: sorts the array in O(n^2) worst time and O(nlogn) average time
+        */
         void QuickSort()
         {
             
