@@ -8,8 +8,7 @@ int main()
     s.Append(20);
     s.Prepend(5);
     s.Insert(30,3);
-    s.PopBack();
-    s.PopFront();
+    s.Delete(3);
     s.Display();
     
 }

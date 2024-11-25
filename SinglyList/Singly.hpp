@@ -139,5 +139,76 @@ class Singly{
             curr->SetNext(nullptr);
             delete curr; 
        }
+       /*
+            Name: Delete()
+            Description: Remove from a index.
+
+            10->20->30->40
+        */
+       void Delete(int index)
+       {
+            if(this->length==0)
+            {
+                std::cout<<"Singly list is empty"<<std::endl;
+                return;
+            }
+            SinglyNode<T> *curr = this->head;
+            SinglyNode<T> *prev = nullptr;
+            int count=0;
+            while(curr!=nullptr &&  count!=index)
+            {
+                count++;
+                prev=curr;
+                curr=curr->GetNext();
+            }
+
+            if(count==0)
+            {
+                PopFront();
+                return;
+            }
+
+            if(count==this->length-1)
+            {
+                PopBack();
+                return;
+            }
+            SinglyNode<T> *temp=curr;
+            prev->SetNext(curr->GetNext());
+            curr->SetNext(nullptr);
+            this->length--;
+            delete temp;
+
+       }
+       /*
+            Name: Peek()
+            Description: Return the value in the top of singly list.
+
+            10->20->30->40
+        */
+       T Peek()
+       {
+            if(this->length==0)
+            {
+                std::cout<<"Singly list is empty"<<std::endl;
+                return;
+            }
+            return this->head->GetVal();
+       }
+       /*
+            Name: Poke()
+            Description: Return the value at the back of singly list.
+
+            10->20->30->40
+        */ 
+       T Poke()
+       {
+        if(this->length==0)
+            {
+                std::cout<<"Singly list is empty"<<std::endl;
+                return;
+            }
+            return this->tail->GetVal();
+       }
 
 };
