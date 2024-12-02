@@ -91,6 +91,52 @@ class DynamicArray
             return i;
         }
 
+        void Merge(T A[] ,int lo,int mid,int hi)
+        {
+            int i=lo;
+            int j=mid+1;
+            int k=lo;
+            T* B = new T[hi-lo];
+
+            while(i<=mid && j<=hi)
+            {
+                if(A[i]<A[j])
+                {
+                    B[k++] = A[i++];
+                }else
+                {
+                    B[k++]=A[j++];
+                }
+            }
+            for(;i<=mid;i++)
+            {
+                B[k++]=A[i];
+            }
+
+            for(;j<=hi;j++)
+            {
+                B[k++]=A[j];
+            }
+
+            for(int l=lo;l<=hi;l++)
+            {
+                A[l]=B[l];
+            }
+            delete[] B;
+        }
+        void MergeSortPrivate(T A[],int lo,int hi)
+        {
+            int mid;
+            if(lo<hi)
+            {
+                mid = (lo+hi)/2;
+
+                MergeSortPrivate(A,lo,mid);
+                MergeSortPrivate(A,mid+1,hi);
+                Merge(A,lo,mid,hi);
+            }
+        }
+
     public:
         /*
             Name: Dynamic Array
@@ -307,6 +353,11 @@ class DynamicArray
             
             QuickSortPrivate(0,GetLength()-1,this->arr);
 
+        }
+
+        void MergeSort()
+        {
+            MergeSortPrivate(this->arr,0,GetLength()-1);
         }
         
         

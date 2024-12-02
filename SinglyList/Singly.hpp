@@ -1,11 +1,91 @@
 #include <iostream>
 #include "SinglyNode.hpp"
+
 template <class T>
 class Singly{
     private:
         SinglyNode<T>* head;
         SinglyNode<T> * tail;
         int length;
+        
+        SinglyNode<T>* Merge(SinglyNode<T> *list1,SinglyNode<T> * list2)
+        {
+            SinglyNode<T> * curr1=list1;
+            SinglyNode<T> * curr2=list2;
+            SinglyNode<T> * temp=nullptr;
+            SinglyNode<T> *newHead=nullptr;
+            SinglyNode<T> *newTail=nullptr;
+            while(curr1&&curr2)
+            {
+                if(curr1->GetVal()<curr2->GetVal())
+                {
+                    if(newHead==nullptr){
+                        newHead=curr1;
+                        newTail=curr1;
+                    }else{
+                        newTail->SetNext(curr1);
+                        newTail=curr1;
+                    }
+                    temp=curr1;
+                    
+                    curr1=curr1->GetNext();
+                    temp->SetNext(nullptr);
+                }else{
+                    if(newHead==nullptr){
+                        newHead=curr2;
+                        newTail=curr2;
+                    }else{
+                        newTail->SetNext(curr2);
+                        newTail=curr2;
+                    }
+                    temp=curr2;
+                    curr2=curr2->GetNext();
+                    temp->SetNext(nullptr);
+                }
+            }
+            if (curr1) {
+                    newTail->SetNext(curr1);
+            }if(curr2) {
+                    newTail->SetNext(curr2);
+            }
+            
+            return newHead;
+        }
+        /*
+        1 2 3 4 5 
+        */
+        SinglyNode<T>* MergeSortPrivate(SinglyNode<T>* head)
+        {
+
+            if(!head||!head->GetNext())
+            {
+                return head;
+            }
+            //get middle
+            SinglyNode<T>*fast = head;
+            SinglyNode<T>*slow = head;
+            SinglyNode<T>* beforeSlow=nullptr;
+
+            while(fast&&fast->GetNext())
+            {
+                fast=fast->GetNext()->GetNext();
+                beforeSlow=slow;
+                slow=slow->GetNext();
+            }
+            
+            SinglyNode<T> * list2 = slow;
+            if(beforeSlow)
+            {
+                beforeSlow->SetNext(nullptr);
+            }
+            
+            SinglyNode<T>* list1 = head;
+
+            list1=MergeSortPrivate(list1);
+            list2=MergeSortPrivate(list2);
+
+            return Merge(list1,list2);
+        }
 
     public:
         Singly()
@@ -210,5 +290,16 @@ class Singly{
             }
             return this->tail->GetVal();
        }
+
+       void MergeSort()
+       {
+            this->head = MergeSortPrivate(this->head);
+            
+       }
+
+       
+       
+
+
 
 };
