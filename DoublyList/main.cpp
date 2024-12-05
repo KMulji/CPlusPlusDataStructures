@@ -5,12 +5,12 @@ int main()
 {
     Doubly<int> d = Doubly<int>();
 
-    for(int i=0;i<5;i++)
-    {
-        d.Prepend(i);
-    }
-    d.Insert(100,5);
-   
+    d.Append(10);
+    d.Append(40);
+    d.Append(30);
+    d.Append(20);
+    
+    d.MergeSort();
     d.Display();
     std::cout<<"..................."<<std::endl;
     d.DisplayReverse();
