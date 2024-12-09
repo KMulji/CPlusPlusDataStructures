@@ -284,6 +284,7 @@ class Doubly{
 
         void MergeSort()
         {
+            
             this->head = MergeSortPrivate(this->head);
             DoublyNode<T> *curr = this->head;
             

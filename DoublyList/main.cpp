@@ -9,9 +9,11 @@ int main()
     d.Append(40);
     d.Append(30);
     d.Append(20);
-    
+    d.Append(-10);
+    d.Append(50);
+     d.Display();
     d.MergeSort();
-    d.Display();
+   
     std::cout<<"..................."<<std::endl;
     d.DisplayReverse();
 
