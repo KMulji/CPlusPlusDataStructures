@@ -70,9 +70,13 @@ class BST{
             if(val > root->GetVal())
             {
                 root->SetRight(DeletePrivate(root->GetRight(),val));
+
+
             }else if(val<root->GetVal())
             {
                 root->SetLeft(DeletePrivate(root->GetLeft(),val));
+
+
             }else{
                 if(!root->GetRight()&&!root->GetLeft())
                 {
@@ -90,7 +94,6 @@ class BST{
                     return temp;
                 }else if (root->GetRight()&& root->GetLeft())
                 {
-
                     BinNode<T> *succ = InOrderSucc(root->GetRight());
                     root->SetVal(succ->GetVal());
                     root->SetRight(DeletePrivate(root->GetRight(),succ->GetVal()));
@@ -153,7 +156,6 @@ class BST{
         }
         void Delete(T val)
         {
-            
             this->root=DeletePrivate(root,val);   
         }
         void Inorder()
